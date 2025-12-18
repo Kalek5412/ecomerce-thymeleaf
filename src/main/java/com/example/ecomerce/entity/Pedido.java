@@ -3,6 +3,7 @@ package com.example.ecomerce.entity;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -14,6 +15,13 @@ public class Pedido {
     private LocalDate fCreacion;
     private LocalDate fRecibida;
     private BigDecimal total;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<DetallePedido> detallePedidos;
 
     public Pedido() {
     }
@@ -63,5 +71,13 @@ public class Pedido {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

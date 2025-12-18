@@ -16,6 +16,14 @@ public class DetallePedido {
     private Double precio;
     private BigDecimal total;
 
+    @ManyToOne
+    @JoinColumn(name = "orden_id")
+    private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
+
     public DetallePedido() {
     }
 

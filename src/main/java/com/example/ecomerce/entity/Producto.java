@@ -12,8 +12,13 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private String imagen;
-    private double precio;
-    private int cantidad;
+    private Double precio;
+    private Integer cantidad;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
 
     public Producto() {
     }
@@ -66,11 +71,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
