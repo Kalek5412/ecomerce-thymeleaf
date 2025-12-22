@@ -6,6 +6,7 @@ import com.example.ecomerce.service.serviceInterface.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,11 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     ProductoRepository productoRepository;
+
+    @Override
+    public List<Producto> findAll() {
+        return productoRepository.findAll();
+    }
 
     @Override
     public Optional<Producto> byId(Long id) {
@@ -25,14 +31,8 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Producto update(Producto producto, Long id) {
-        Producto prodAux=productoRepository.findById(id).get();
-        prodAux.setNombre(producto.getNombre());
-        prodAux.setDescripcion(producto.getDescripcion());
-        prodAux.setImagen(producto.getImagen());
-        prodAux.setPrecio(producto.getPrecio());
-        prodAux.setCantidad(producto.getCantidad());
-        return productoRepository.save(prodAux);
+    public Producto update(Producto producto) {;
+        return productoRepository.save(producto);
     }
 
     @Override

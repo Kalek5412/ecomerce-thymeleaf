@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--* favicon -->
+  <link
+          rel="shortcut icon"
+          th:href="@{/assets/images/logo/favicon.ico}"
+          type="image/x-icon"
+  />
+  <!--! css link -->
+  <link rel="stylesheet" th:href="@{/assets/style.css}" />
+  <!--? swiperjs cdn link -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+  <!--todo tailwind cdn link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: "#da373d",
+          },
+        },
+      },
+    };
+  </script>
+  <title>eCommerece</title>
+</head>
+<body>
+<!--todo header -->
+<div th:include="administrador/template_admin.html::header"></div>
+<!--todo table -->
+<section class="w-full p-8 bg-gray-100">
+  <div class="bg-white shadow-lg rounded-xl p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-700">Gestión de Productos</h1>
+      <a th:href="@{/productos/create}"
+         class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-red-500 transition" >
+        + Nuevo Producto
+      </a>
+    </div>
+    <table class="w-full border-collapse text-sm">
+      <thead class="bg-gray-100 text-gray-700">
+      <tr>
+        <th class="border p-3">ID</th>
+        <th class="border p-3">Nombre</th>
+        <th class="border p-3">Descipcion</th>
+        <th class="border p-3">Precio</th>
+        <th class="border p-3">img</th>
+        <th class="border p-3">cantidad</th>
+        <th class="border p-3">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  th:each="p : ${productos}" class="hover:bg-gray-50 text-center">
+        <td class="border p-2" th:text="${p.id}"></td>
+        <td class="border p-2" th:text="${p.nombre}"></td>
+        <td class="border p-2" th:text="${p.descripcion}"></td>
+        <td class="border p-2" th:text="${p.precio}"></td>
+        <td class="border p-2" th:text="${p.imagen}"></td>
+        <td class="border p-2" th:text="${p.cantidad}"></td>
+        <td class="border p-2 flex justify-center gap-2">
+          <a th:href="@{/productos/edit/{id}(id=${p.id})}"
+                  class="px-3 py-1 text-sm rounded-md bg-blue-500 text-white hover:bg-blue-600" >
+            Editar
+          </a>
+          <a th:href="@{/productos/delete/{id}(id=${p.id})}"
+                  class="px-3 py-1 text-sm rounded-md bg-red-500 text-white hover:bg-red-600"
+                  onclick="return confirm('¿Eliminar producto?')" >
+            Eliminar
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<!--todo footer -->
+<div th:include="administrador/template_admin.html::footer"></div>
+</body>
+
+
+</html>

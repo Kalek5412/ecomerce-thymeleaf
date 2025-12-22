@@ -1,50 +1,97 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="popup">
+  <div
+          id="newspaper"
+          class="z-20 fixed w-screen h-screen hidden items-center justify-center"
+  >
+    <div
+            id="newspaperOverlay"
+            class="z-10 fixed top-0 w-screen h-screen bg-[#00000066]"
+    ></div>
+    <div
+            id="newspaperBox"
+            class="z-20 w-4/5 lg:w-3/6 h-2/5 lg:h-3/5 bg-white flex items-center rounded-md overflow-hidden border shadow-md"
+    >
+      <div class="hidden md:flex md:w-1/2 h-full">
+        <img
+                class="w-full h-full"
+                th:src="@{assets/images/newsletter.png}"
+                alt="newsletter"
+        />
+      </div>
+      <div
+              class="w-full md:w-1/2 h-full flex flex-col justify-center p-12 px-8 gap-4 relative"
+      >
+        <button
+                class="closeButton absolute top-4 right-4 text-2xl hover:text-red-500"
+        >
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </button>
+        <h3 class="text-xl font-bold text-gray-800">Subscribe Newsletter.</h3>
+        <p class="text-md text-gray-600 font-semibold">
+          Subscribe the <span class="text-lg font-semibold">Anon</span> to get
+          latest products and discount update.
+        </p>
+        <input class="border p-2" type="email" placeholder="Email Address" />
+        <button
+                class="rounded-md self-center py-2 px-3 bg-gray-900 text-white hover:bg-red-500"
+        >
+          SUBSCRIBE
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
 <div th:fragment="header">
   <header class="header w-full">
     <!--! topHeader -->
     <div
             class="top-header w-screen flex flex-col items-center justify-between border-b"
     >
-      <div class="flex w-full items-center justify-between p-4 md:px-20 border-b">
-        <div class="icons hidden lg:flex items-center gap-2">
-          <a
-                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"
-                  href="#"
-          >
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-          <a
-                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"
-                  href="#"
-          >
-            <ion-icon name="logo-linkedin"></ion-icon>
-          </a>
-          <a
-                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"
-                  href="#"
-          >
-            <ion-icon name="logo-github"></ion-icon>
-          </a>
-        </div>
-        <h3 class="text-gray-400 font-semibold text-xs">
-          FREE SHIPPING THIS WEEK ORDER OVER - $55
-        </h3>
-        <div class="select hidden md:flex">
-          <select class="mr-2 p-1 px-2 text-sm font-semibold" id="currency">
-            <option value="USD">USD $</option>
-            <option value="EUR">EUR €</option>
-          </select>
-          <select class="mr-2 p-1 px-2 text-sm font-semibold" id="language">
-            <option value="Persian">English</option>
-            <option value="English">Persian</option>
-          </select>
-        </div>
-      </div>
+<!--      <div class="flex w-full items-center justify-between p-4 md:px-20 border-b">-->
+<!--        <div class="icons hidden lg:flex items-center gap-2">-->
+<!--          <a-->
+<!--                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"-->
+<!--                  href="#"-->
+<!--          >-->
+<!--            <ion-icon name="logo-instagram"></ion-icon>-->
+<!--          </a>-->
+<!--          <a-->
+<!--                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"-->
+<!--                  href="#"-->
+<!--          >-->
+<!--            <ion-icon name="logo-linkedin"></ion-icon>-->
+<!--          </a>-->
+<!--          <a-->
+<!--                  class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-red-400 flex items-center justify-center transition-all"-->
+<!--                  href="#"-->
+<!--          >-->
+<!--            <ion-icon name="logo-github"></ion-icon>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <h3 class="text-gray-400 font-semibold text-xs">-->
+<!--          FREE SHIPPING THIS WEEK ORDER OVER - $55-->
+<!--        </h3>-->
+<!--        <div class="select hidden md:flex">-->
+<!--          <select class="mr-2 p-1 px-2 text-sm font-semibold" id="currency">-->
+<!--            <option value="USD">USD $</option>-->
+<!--            <option value="EUR">EUR €</option>-->
+<!--          </select>-->
+<!--          <select class="mr-2 p-1 px-2 text-sm font-semibold" id="language">-->
+<!--            <option value="Persian">English</option>-->
+<!--            <option value="English">Persian</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </div>-->
       <div
               class="gap-4 flex flex-col sm:flex-row w-full items-center justify-between p-6 md:px-24"
       >
-        <h1 class="font-semibold text-4xl text-gray-600">Anon</h1>
+        <a th:href="@{/administrador}">
+          <h1 class="font-semibold text-4xl text-gray-600">Anon</h1>
+        </a>
+
         <form class="relative w-full sm:w-3/5">
           <input
                   class="w-full h-full p-2 border rounded-xl"
@@ -934,5 +981,138 @@
         Copyright © Anon All Rights Reserved.
       </h4>
     </div>
+    <!--! icons -->
+    <script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!--!javascript file  -->
+    <script type="module" th:src="@{assets/index.js}"></script>
   </footer>
+</div>
+<div th:fragment="testimonio">
+  <!--<div-->
+  <!--        class="mt-10 w-full px-8 lg:px-0 lg:w-5/6 mx-auto flex flex-wrap lg:flex-nowrap flex-col lg:flex-row gap-8 mb-20"-->
+  <!--&gt;-->
+  <!--    <div class="testimonial w-full lg:w-2/6">-->
+  <!--        <h1 class="text-xl font-semibold border-b pb-4 mb-8">Testimonial</h1>-->
+  <!--        <div-->
+  <!--                style="height: 23rem"-->
+  <!--                class="w-full border rounded-xl flex flex-col items-center justify-center p-4"-->
+  <!--        >-->
+  <!--            <img-->
+  <!--                    class="w-20 h-20 rounded-full"-->
+  <!--                    th:src="@{assets/images/testimonial-1.jpg}"-->
+  <!--                    alt="testimonial"-->
+  <!--            />-->
+  <!--            <h2 class="text-lg font-bold text-gray-600">ALAN DOE</h2>-->
+  <!--            <h5 class="text-md">CEO & Founder Invision</h5>-->
+  <!--            <img-->
+  <!--                    class="w-6 h-6 my-4"-->
+  <!--                    th:src="@{assets/images/icons/quotes.svg}"-->
+  <!--                    alt="quotes"-->
+  <!--            />-->
+  <!--            <p class="text-sm w-4/5 mx-auto text-center">-->
+  <!--                Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit-->
+  <!--                amet.-->
+  <!--            </p>-->
+  <!--        </div>-->
+  <!--    </div>-->
+
+  <!--    <div-->
+  <!--            class="w-full lg:w-3/6 rounded-lg flex items-center justify-center"-->
+  <!--            style="background-image: url('./assets/images/cta-banner.jpg')"-->
+  <!--    >-->
+  <!--        <div-->
+  <!--                class="flex flex-col items-center justify-center p-8 gap-4 bg-gray-100/70 rounded-lg w-3/4"-->
+  <!--        >-->
+  <!--            <button class="bg-gray-900 text-white p-2 rounded-lg">-->
+  <!--                25% DISCOUNT-->
+  <!--            </button>-->
+  <!--            <h1 class="w-56 text-4xl font-bold text-center text-gray-800">-->
+  <!--                Summer Collection-->
+  <!--            </h1>-->
+  <!--            <h5 class="text-lg font-semibold text-gray-500">Starting @ $10</h5>-->
+  <!--            <button class="text-lg font-semibold text-gray-500">SHOP NOW</button>-->
+  <!--        </div>-->
+  <!--    </div>-->
+
+  <!--    <div class="OurServices w-full lg:w-2/6">-->
+  <!--        <h1 class="text-xl font-semibold border-b pb-4 mb-8">Our Services</h1>-->
+  <!--        <div-->
+  <!--                style="height: 23rem"-->
+  <!--                class="w-full border rounded-xl flex flex-wrap justify-between lg:flex-col items-center lg:justify-center p-4 lg:px-8 lg:gap-8"-->
+  <!--        >-->
+  <!--            <div-->
+  <!--                    class="w-1/2 lg:w-full flex justify-center lg:justify-between items-center gap-2"-->
+  <!--            >-->
+  <!--                <ion-icon class="text-red-500 text-4xl" name="boat-outline"></ion-icon>-->
+  <!--                <div>-->
+  <!--                    <h3 class="font-semibold text-gray-700">Worldwide Delivery</h3>-->
+  <!--                    <p class="text-xs text-gray-600">For Order Over $100</p>-->
+  <!--                </div>-->
+  <!--            </div>-->
+
+  <!--            <div-->
+  <!--                    class="w-1/2 lg:w-full flex justify-center lg:justify-between items-center gap-2"-->
+  <!--            >-->
+  <!--                <ion-icon-->
+  <!--                        class="text-red-500 text-4xl"-->
+  <!--                        name="rocket-outline"-->
+  <!--                ></ion-icon>-->
+  <!--                <div>-->
+  <!--                    <h3 class="font-semibold text-gray-700">Worldwide Delivery</h3>-->
+  <!--                    <p class="text-xs text-gray-600">For Order Over $100</p>-->
+  <!--                </div>-->
+  <!--            </div>-->
+
+  <!--            <div-->
+  <!--                    class="w-1/2 lg:w-full flex justify-center lg:justify-between items-center gap-2"-->
+  <!--            >-->
+  <!--                <ion-icon class="text-red-500 text-4xl" name="call-outline"></ion-icon>-->
+  <!--                <div>-->
+  <!--                    <h3 class="font-semibold text-gray-700">Worldwide Delivery</h3>-->
+  <!--                    <p class="text-xs text-gray-600">For Order Over $100</p>-->
+  <!--                </div>-->
+  <!--            </div>-->
+
+  <!--            <div-->
+  <!--                    class="w-1/2 lg:w-full flex justify-center lg:justify-between items-center gap-2"-->
+  <!--            >-->
+  <!--                <ion-icon-->
+  <!--                        class="text-red-500 text-4xl"-->
+  <!--                        name="arrow-undo-outline"-->
+  <!--                ></ion-icon>-->
+  <!--                <div>-->
+  <!--                    <h3 class="font-semibold text-gray-700">Worldwide Delivery</h3>-->
+  <!--                    <p class="text-xs text-gray-600">For Order Over $100</p>-->
+  <!--                </div>-->
+  <!--            </div>-->
+
+  <!--            <div-->
+  <!--                    class="w-1/2 lg:w-full flex justify-center lg:justify-between items-center gap-2"-->
+  <!--            >-->
+  <!--                <ion-icon-->
+  <!--                        class="text-red-500 text-4xl"-->
+  <!--                        name="ticket-outline"-->
+  <!--                ></ion-icon>-->
+  <!--                <div>-->
+  <!--                    <h3 class="font-semibold text-gray-700">Worldwide Delivery</h3>-->
+  <!--                    <p class="text-xs text-gray-600">For Order Over $100</p>-->
+  <!--                </div>-->
+  <!--            </div>-->
+  <!--        </div>-->
+  <!--    </div>-->
+  <!--</div>-->
+
+  <!--<div class="w-full mx-auto flex my-10">-->
+  <!--    <div class="swiper blog_swiper">-->
+  <!--        <div class="swiper-wrapper" id="blog_swiper"></div>-->
+  <!--        <div class="swiper-scrollbar"></div>-->
+  <!--    </div>-->
+  <!--</div>-->
 </div>
