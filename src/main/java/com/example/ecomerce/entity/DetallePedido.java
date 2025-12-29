@@ -24,8 +24,7 @@ public class DetallePedido {
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    public DetallePedido() {
-    }
+
 
     public DetallePedido(String nombre, Double precio, Integer cantidad, BigDecimal total) {
         this.nombre = nombre;
@@ -72,5 +71,24 @@ public class DetallePedido {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public DetallePedido() {
     }
 }
