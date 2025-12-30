@@ -96,16 +96,12 @@ public class HomeController {
                         .multiply(BigDecimal.valueOf(cantidad))
         );
         detalleOrden.setProducto(producto);
-        detalles.add(detalleOrden);
-//
-//        //validar que le producto no se añada 2 veces
-//        Long idProducto=producto.getId();
-//        boolean ingresado=detalles.stream().anyMatch(p -> p.getProducto().getId()==idProducto);
-//
-//        if (!ingresado) {
-//            detalles.add(detalleOrden);
-//        }
-//
+        //validar que le producto no se añada 2 veces
+        Long idProducto=producto.getId();
+        boolean ingresado=detalles.stream().anyMatch(p -> p.getProducto().getId()==idProducto);
+        if (!ingresado) {
+            detalles.add(detalleOrden);
+        }
         // sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
         sumaTotal = detalles.stream()
                 .map(DetallePedido::getTotal)
@@ -116,43 +112,38 @@ public class HomeController {
         return "usuario/carrito";
     }
 
-//    // quitar un producto del carrito
-//    @GetMapping("/delete/cart/{id}")
-//    public String deleteProductoCart(@PathVariable Integer id, Model model) {
-//
-//        // lista nueva de prodcutos
-//        List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
-//
-//        for (DetalleOrden detalleOrden : detalles) {
-//            if (detalleOrden.getProducto().getId() != id) {
-//                ordenesNueva.add(detalleOrden);
-//            }
-//        }
-//
-//        // poner la nueva lista con los productos restantes
-//        detalles = ordenesNueva;
-//
-//        double sumaTotal = 0;
-//        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
-//
-//        orden.setTotal(sumaTotal);
-//        model.addAttribute("cart", detalles);
-//        model.addAttribute("orden", orden);
-//
-//        return "usuario/carrito";
-//    }
-//
-//    @GetMapping("/getCart")
-//    public String getCart(Model model, HttpSession session) {
-//
-//        model.addAttribute("cart", detalles);
-//        model.addAttribute("orden", orden);
-//
-//        //sesion
-//        model.addAttribute("sesion", session.getAttribute("idusuario"));
-//        return "/usuario/carrito";
-//    }
-//
+    // quitar un producto del carrito
+    @GetMapping("/delete/cart/{id}")
+    public String deleteProductoCart(@PathVariable Long id, Model model) {
+        List<DetallePedido> ordenesNueva = new ArrayList<DetallePedido>();
+        for (DetallePedido detalleOrden : detalles) {
+            if (detalleOrden.getProducto().getId() != id) {
+                ordenesNueva.add(detalleOrden);
+            }
+        }
+        // poner la nueva lista con los productos restantes
+        detalles = ordenesNueva;
+        BigDecimal sumaTotal = BigDecimal.valueOf(0);
+        sumaTotal = detalles.stream()
+                .map(DetallePedido::getTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        orden.setTotal(sumaTotal);
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+        return "usuario/carrito";
+    }
+
+    @GetMapping("/getCart")
+    public String getCart(Model model, HttpSession session) {
+
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+
+        //sesion
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
+        return "/usuario/carrito";
+    }
+
 //    @GetMapping("/order")
 //    public String order(Model model, HttpSession session) {
 //
