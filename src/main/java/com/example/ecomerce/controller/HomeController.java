@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 import com.example.ecomerce.entity.DetallePedido;
 import com.example.ecomerce.entity.Pedido;
 import com.example.ecomerce.entity.Producto;
+import com.example.ecomerce.entity.Usuario;
 import com.example.ecomerce.service.serviceInterface.ProductoService;
+import com.example.ecomerce.service.serviceInterface.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,10 +45,9 @@ public class HomeController {
     // datos de la orden
     Pedido orden = new Pedido();
 
-//    @Autowired
-//    private Usuario usuarioService;
-//
-//
+    @Autowired
+    private UsuarioService usuarioService;
+
 //    @Autowired
 //    private IOrdenService ordenService;
 //
@@ -134,28 +135,25 @@ public class HomeController {
     }
 
     @GetMapping("/getCart")
-    public String getCart(Model model, HttpSession session) {
+    public String getCart(Model model) {
 
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
 
         //sesion
-        model.addAttribute("sesion", session.getAttribute("idusuario"));
-        return "/usuario/carrito";
+       // model.addAttribute("sesion", session.getAttribute("idusuario"));
+        return "usuario/carrito";
     }
 
-//    @GetMapping("/order")
-//    public String order(Model model, HttpSession session) {
-//
-//        Usuario usuario =usuarioService.findById( Integer.parseInt(session.getAttribute("idusuario").toString())).get();
-//
-//        model.addAttribute("cart", detalles);
-//        model.addAttribute("orden", orden);
-//        model.addAttribute("usuario", usuario);
-//
-//        return "usuario/resumenorden";
-//    }
-//
+    @GetMapping("/order")
+    public String order(Model model) {
+        Usuario usuario =usuarioService.findById(1L).get();
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+        model.addAttribute("usuario", usuario);
+        return "usuario/resumen_orden";
+    }
+
 //    // guardar la orden
 //    @GetMapping("/saveOrder")
 //    public String saveOrder(HttpSession session ) {

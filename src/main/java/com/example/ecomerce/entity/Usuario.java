@@ -13,6 +13,7 @@ public class Usuario {
     private String nombres;
     private String username;
     private String password;
+    private String direccion;
     private String email;
     private String tipo;
     private String telefono;
@@ -95,15 +96,15 @@ public class Usuario {
         this.pedidos = pedidos;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDirecion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public Usuario() {
     }
 
-    public Usuario(String nombres, String username, String password, String email, String tipo, String telefono) {
-        this.nombres = nombres;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.tipo = tipo;
-        this.telefono = telefono;
-    }
 }
