@@ -100,7 +100,7 @@ public class Usuario {
         return direccion;
     }
 
-    public void setDirecion(String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 

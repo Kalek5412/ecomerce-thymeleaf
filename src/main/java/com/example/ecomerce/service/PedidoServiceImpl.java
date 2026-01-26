@@ -20,12 +20,12 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public List<Pedido> findAll() {
-        return List.of();
+        return pedidoRepository.findAll();
     }
 
     @Override
     public Optional<Pedido> findById(Long id) {
-        return Optional.empty();
+        return pedidoRepository.findById(id);
     }
 
     @Override
@@ -60,6 +60,6 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public List<Pedido> findByUsuario(Usuario usuario) {
-        return List.of();
+        return pedidoRepository.findByUsuario(usuario);
     }
 }

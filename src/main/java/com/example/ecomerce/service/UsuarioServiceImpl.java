@@ -21,16 +21,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<Usuario> findAll() {
-        return List.of();
+        return usuarioRepository.findAll();
     }
 
     @Override
     public Usuario save(Usuario usuario) {
-        return null;
+        return usuarioRepository.save(usuario);
     }
 
     @Override
     public Optional<Usuario> findByEmail(String email) {
-        return Optional.empty();
+        return usuarioRepository.findByEmail(email);
     }
 }
