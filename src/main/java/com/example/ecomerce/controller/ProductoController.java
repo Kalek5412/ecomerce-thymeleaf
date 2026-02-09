@@ -6,6 +6,8 @@ import com.example.ecomerce.entity.Usuario;
 import com.example.ecomerce.repository.UsuarioRepository;
 import com.example.ecomerce.service.UploadFileService;
 import com.example.ecomerce.service.serviceInterface.ProductoService;
+import com.example.ecomerce.service.serviceInterface.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
     @Autowired
     private UploadFileService upload;
 
@@ -43,16 +45,18 @@ public class ProductoController {
     }
 
     @PostMapping("/save")
-    public String save(Producto producto,@RequestParam("file") MultipartFile file) throws IOException {
-        LOG.info("este es el obj producto {}",producto);
-        Usuario usuario=usuarioRepository.findById(1L).get();
-        producto.setUsuario(usuario);
-        if (!file.isEmpty()) {
-            String nombreImagen = upload.saveImage(file);
+    public String save(Producto producto,@RequestParam("file") MultipartFile file, HttpSession session) throws IOException {
+        LOG.info("Este es el objeto producto {}",producto);
+        Usuario u= usuarioService.findById(Long.parseLong(session.getAttribute("idusuario").toString() )).get();
+        producto.setUsuario(u);
+        //imagen
+        if (producto.getId()==0) { // cuando se crea un producto
+            String nombreImagen= upload.saveImage(file);
             producto.setImagen(nombreImagen);
         }else {
-            producto.setImagen("default.jpg");
+
         }
+
         productoService.save(producto);
         return "redirect:/productos";
     }
